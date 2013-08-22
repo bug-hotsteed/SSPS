@@ -1,15 +1,22 @@
-# It's a java socket server provides socket policy file for Flash Player on port 843.
+# SSPS : Simple Socket Policy Server
 
 ## Description
-Really a simple java socket server prints :
+It's a java socket server provides a simple socket policy file for Flash Player on port 843.
+
+``` XML
 <cross-domain-policy>
     <allow-access-from domain="*" to-ports="*"/>
 </cross-domain-policy>
+```
 
 on port 843 for Flash Player socket connection.
 
-## How to use
+## How to Use
+
 In my case :
-$nohup java -jar ssps.jar &
+
+``` bash
+nohup java -jar ssps.jar &
+```
 
 That's all.
