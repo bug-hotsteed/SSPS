@@ -22,14 +22,10 @@ public class SimpleSocketPolicyServer {
                     @Override
                     public void run() {
                         try {
-                            client.setSoTimeout(10000); //clean failed connections
+                            client.setSoTimeout(10000); //clear
                             client.getOutputStream().write(SimpleSocketPolicyServer.POLICY_XML.getBytes());
-                            client.getOutputStream().write(0x00); //write required endbit
+                            client.getOutputStream().write(0x00);//required endbit
                             client.getOutputStream().flush();
-                           //  BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                            //reading two lines emties flashs buffer and magically it works!
-                            // in.readLine();
-                            // in.readLine();
                         } catch (IOException e) {
                         }
                     }
