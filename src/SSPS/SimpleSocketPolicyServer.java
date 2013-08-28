@@ -22,12 +22,21 @@ public class SimpleSocketPolicyServer {
                     @Override
                     public void run() {
                         try {
-                            client.setSoTimeout(10000); //clear
+                            client.setSoTimeout(10000); //clean failed connections
                             client.getOutputStream().write(SimpleSocketPolicyServer.POLICY_XML.getBytes());
-                            client.getOutputStream().write(0x00);//required endbit
+                            client.getOutputStream().write(0x00); //write required endbit
                             client.getOutputStream().flush();
-                        } catch (IOException e) {
-                        }
+                            BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                            //reading two lines emties flashs buffer and magically it works!
+                            // in.readLine();
+                            // in.readLine();
+                            
+                            System.out.println("from client(" + client.getInetAddress() + ") :");
+                            System.out.println(in.readLine());
+                            System.out.println(in.readLine());
+                            
+                            // client.close();
+                        } catch (IOException e) {e.printStackTrace();}
                     }
                 }).start();
             } catch (Exception e) {}
